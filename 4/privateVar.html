@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+
+  <script>
+    function Ninja() {
+      var feints = 0
+      this.getFeints = function () {
+        return feints
+      }
+      this.feint = function () {
+        feints++
+      }
+    }
+
+    var ninja1 = new Ninja()
+
+    var ninja = new Ninja()
+    ninja.feint()
+    console.log(ninja.getFeints())
+    // ninja.getFeints() =3
+    console.log(ninja.getFeints())
+    // console.log(ninja1.getFeints())
+    // console.log(ninja.feints)
+
+
+
+    // Function Bind
+    Function.prototype.bind = function () {
+      var fn = this,
+        args = Array.prototype.slice.call(arguments);
+      console.log(this)
+      console.log(args)
+      var object = args.shift()
+      return function () {
+        console.log(args.concat(Array.prototype.slice.call(arguments)))
+        console.log(fn.apply(object, args.concat(Array.prototype.slice.call(arguments))))
+        return fn.apply(object, args.concat(Array.prototype.slice.call(arguments)))
+      }
+    }
+    var myObject = {}
+
+    function myFunction() {
+      return this === myObject
+    }
+    console.log(myFunction())
+    console.log(myFunction.bind(myObject)())
+    console.log('---------curry----------------')
+
+    Function.prototype.curry = function () {
+      var fn = this,
+        args = Array.prototype.slice.call(arguments);
+      return function () {
+        return fn.apply(this, args.concat(Array.prototype.slice.call(arguments)))
+      }
+    }
+
+    console.log('------------partial---------------')
+
+
+    Function.prototype.partial = function () {
+      var fn = this,
+        args = Array.prototype.slice.call(arguments)
+      console.log(this)
+      console.log(args)
+      return function () {
+        var arg = 0
+        console.log(this)
+        console.log(arguments)
+        for (var i = 0; i < args.length && arg < arguments.length; i++) {
+          console.log(args[i])
+          if (args[i] === undefined) {
+            args[i] = arguments[arg++]
+          }
+        }
+        return fn.apply(this, args)
+      }
+    }
+    var delay = setTimeout.partial(undefined, 10)
+    console.log(delay)
+    delay(function () {
+      console.log('already delay 10s')
+    })
+
+    console.log('----------memoized-----------')
+    Function.prototype.memoized = function (key) {
+      this._values = this._values || {}
+      return this._values[key] !== undefined ?
+        this._values[key] :
+        this._values[key] = this.apply(this, arguments)
+    }
+
+    function isPrime(num) {
+      console.log(this)
+      var prime = num !=1;
+      for(var i =2; i<num; i++) {
+        if(num%i==0) {
+          prime = false
+          break
+        }
+      }
+      return prime
+    } 
+
+  console.log(isPrime.memoized(5))
+  console.log(isPrime)
+  console.log(isPrime._values[5])
+
+
+  </script>
+</body>
+
+</html>

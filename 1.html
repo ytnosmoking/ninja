@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    html,body {
+      margin: 0;
+      padding: 0;
+    }
+    .wrapper {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      display: grid;
+      /* grid-template-columns: 100px 100px 100px ; */
+      grid-template-rows: 100px 100px 100px;
+      grid-gap: 10px 30px; 
+      /*  grid-row-gap   grid-column-gap */
+      background-color: #000;
+      justify-items: stretch;
+      align-items: center;
+      justify-content: stretch;
+      align-content: end;
+    }
+    
+    div[class^="item"]:nth-child(1){
+      background-color: blue;
+      grid-column-start: 1;
+      grid-column-end: 3; 
+    }
+    .item3 {
+      grid-row-start: 2;
+      grid-row-end: 4;
+    }
+    .item4 {
+      grid-column-start: 2;
+      grid-column-end: 4;
+    }
+  
+    div[class^="item"]:nth-child(2){
+      background-color: orange;
+    }
+    div[class^="item"]:nth-child(3){
+      background-color: grey;
+    }
+    div[class^="item"]:nth-child(4){
+      background-color: greenyellow;
+    }
+    div[class^="item"]:nth-child(5){
+      background-color: cyan;
+    }
+    div[class^="item"]:nth-child(6){
+      background-color: mediumorchid;
+    }
+    .wrap1 {
+      display: grid;
+      grid-template-columns: 60px 60px;
+      grid-template-rows: 90px 90px;
+      grid-auto-columns: 60px;
+    }
+    .aitem {
+      background-color: green;
+      grid-column: 1/2;
+      grid-row: 1/2;
+    }
+    .bitem {
+      background-color: orange;
+      grid-column: 5/6;
+      grid-row: 2/3;
+    }
+    .wrap3 {
+      display: grid;
+      grid-template-areas: 
+      "header header header"
+      "footer footer footer";
+      grid-template-rows: [row1-start] 1fr [row1-end row2-start] 25px [row2-end];
+      grid-template-columns: auto 50px auto;    
+      }
+
+  </style>
+</head>
+<body>
+  
+  <div class="wrapper">
+    <div class="item1">1</div>
+    <div class="item2">2</div>
+    <div class="item3">3</div>
+    <div class="item4">4</div>
+    <div class="item5">5</div>
+    <div class="item6">6</div>
+  </div>
+
+  <div class="wrap1">
+    <div class="aitem">itema</div>
+    <div class="bitem">itemb</div>
+  </div>
+  <div class="wrap3">wrap3</div>
+
+</body>
+</html>

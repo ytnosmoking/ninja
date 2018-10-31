@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    div{
+      border: 1px solid #000;
+      height: 50px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <button> click111!!</button>
+
+  <button> click222!!</button>
+  <div>
+    1
+  </div>
+  <div>
+    2
+  </div>
+
+
+  <script>
+    function getDom(dom) {
+      return document.getElementsByTagName(dom)
+    }
+
+    (function(){
+      var num = 0
+      getDom('button')[0].addEventListener('click',function() {
+        alert(++num)
+      }, false)
+    })()
+
+    getDom('button')[1].addEventListener('click', (function () {
+      var num = 0
+      return function () {
+        num+=2
+        alert(num)
+      }
+    })(), false)
+
+    var divs = getDom("div")
+    console.log(divs)
+    // Array.prototype.forEach.call(divs,function(item, index) {
+    //     item.addEventListener('click', (function(){
+    //       return function(){
+    //         alert(index)
+    //       }
+    //     })(index))
+    // })
+
+    for(var i=0;i<divs.length;i++) {
+      (function(n){
+        divs[n].addEventListener('click', function() {
+          n+=3
+          alert(n)
+        })
+      })(i)
+    }
+
+  </script>
+
+
+</body>
+
+</html>

@@ -102,21 +102,21 @@
 
     function isPrime(num) {
       console.log(this)
-      var prime = num !=1;
-      for(var i =2; i<num; i++) {
-        if(num%i==0) {
+      var prime = num != 1;
+      for (var i = 2; i < num; i++) {
+        if (num % i == 0) {
           prime = false
           break
         }
       }
       return prime
-    } 
+    }
 
-  console.log(isPrime.memoized(5))
-  console.log(isPrime)
-  console.log(isPrime._values[5])
+    console.log(isPrime.memoized(5))
+    console.log(isPrime)
+    console.log(isPrime._values[5])
 
-
+    console.log(1111)
   </script>
 </body>
 
